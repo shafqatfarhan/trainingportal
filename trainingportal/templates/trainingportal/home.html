@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Home | Training Portal</title>{% endblock %}
+</head>
+
+<body>
+    {% load bootstrap3 %}
+    {% load static %}
+    {% bootstrap_css %}
+    <div class="row" style="background-color:#BDE3FB;padding-right: 5%;">
+        <div class="pull-right" style="padding-top: 1%;">
+          {% if user.is_authenticated %}
+              {% buttons %}
+                    <span>Welcome, {{ user.username }}</span>
+                    &nbsp;&nbsp;&nbsp;
+                    <button  type="button" id="logoutBtn" onclick="location.href='/logout/'" class="btn btn-primary">
+                        Logout
+                    </button>
+              {% endbuttons %}
+          {% else %}
+               {% buttons %}
+                    <button type="button" id="loginBtn" onclick="location.href='/login/'" class="btn btn-primary">
+                        Login
+                    </button>
+                    <button type="button" id="registerBtn" onclick="location.href='/register/'" class="btn btn-primary">
+                        Register
+                    </button>
+              {% endbuttons %}
+          {% endif %}
+        </div>
+    </div>
+    <div class="container">
+        <h1> Welcome Home :) </h1>
+    </div>
+
+</body>
+</html>

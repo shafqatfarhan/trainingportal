@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {# <link rel="stylesheet" href="style.css" /> #}
+    <title>{% block title %}Register | Training Portal</title>{% endblock %}
+</head>
+
+<body>
+    {% load bootstrap3 %}
+    {% load static %}
+    {% bootstrap_css %}
+{#{% bootstrap_javascript %}#}
+{#{% extends "base.html" %}#}
+{#    It is {% now "jS F Y H:i" %} now#}
+{##}
+{#    {{ value|add:"2" }}#}
+{##}
+{#    {{ data|default:"This is a string literal." }}#}
+{##}
+{#    {{ None|default_if_none:"nothing" }}#}
+
+{#    {% filter force_escape|upper %}#}
+{#        This text will be HTML-escaped, and will appear in all lowercase.#}
+{#    {% endfilter %}#}
+
+{#    <ul>#}
+{#      {% if athlete_list %}#}
+{#        {% for athlete in athlete_list %}#}
+{#          <li>{{ athlete.name }}</li>#}
+{#        {% endfor %}#}
+{#      {% else %}#}
+{#        <li>Sorry, no athletes in this list.</li>#}
+{#      {% endif %}#}
+{#    </ul>#}
+{##}
+{#    {% if athlete_list %}#}
+{#        Number of athletes: {{ athlete_list|length }}#}
+{#    {% elif athlete_in_locker_room_list %}#}
+{#        Athletes should be out of the locker room soon!#}
+{#    {% else %}#}
+{#        No athletes.#}
+{#    {% endif %}#}
+
+{#    {% if "Hello"|length >= 5 %}#}
+{#       You have lots of messages today!#}
+{#    {% endif %}#}
+
+{#    <div id="sidebar">#}
+{#        {% block sidebar %}#}
+{#        <ul>#}
+{#            <li><a href="/">Home</a></li>#}
+{#            <li><a href="/blog/">Blog</a></li>#}
+{#        </ul>#}
+{#        {% endblock %}#}
+{#    </div>#}
+{##}
+{#    <div id="content">#}
+{#        {% block content %}{% endblock %}#}
+{#    </div>#}
+    <h1 class="container text-center" style="width: 500px; margin-top: 50px;">Signup Form</h1>
+    <div class="container" style="width: 500px; margin-top: 40px;">
+        <form action="" class="well form-horizontal" id="signupForm" style="padding-left: 40px; padding-right: 40px;"
+              method="post">
+            <p id="validate_text" style="color: red"></p>
+            {% csrf_token %}
+            {% bootstrap_form user_form %}
+            {% bootstrap_form_errors user_form %}
+            {% bootstrap_form profile_form %}
+            {% buttons %}
+                <button type="submit" formNoValidate id="submitBtn" class="btn btn-primary center-block">
+                    {% bootstrap_icon "star" %} Submit
+                </button>
+            {% endbuttons %}
+        </form>
+    </div>
+
+    <script src={% static "js/trainingportal/signupformvalidation.js" %}></script>
+</body>
