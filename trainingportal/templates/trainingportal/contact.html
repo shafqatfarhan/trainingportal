@@ -12,16 +12,16 @@
 {% bootstrap_label "HELLO" %}
 {% bootstrap_alert "Something went wrong" alert_type='danger' %}
 
-    <form action="" method="post">{% csrf_token %}
-        {% bootstrap_form form %}
-        {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
+<form action="" method="post">{% csrf_token %}
+    {% bootstrap_form form %}
+    {% bootstrap_button "Submit" button_type="submit" button_class="btn-primary" %}
 
-{#        {% buttons %}#}
-{#            <button type="submit" class="btn btn-primary">#}
-{#              {% bootstrap_icon "star" %} Submit#}
-{#            </button>#}
-{#         {% endbuttons %}#}
-    </form>
+    {#        {% buttons %}#}
+    {#            <button type="submit" class="btn btn-primary">#}
+    {#              {% bootstrap_icon "star" %} Submit#}
+    {#            </button>#}
+    {#         {% endbuttons %}#}
+</form>
 
 {% bootstrap_javascript jquery=1 %}
 {% bootstrap_messages %}

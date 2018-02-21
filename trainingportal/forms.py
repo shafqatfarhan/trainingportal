@@ -1,11 +1,13 @@
 from django import forms
-from .models import Trainee
 from django.contrib.auth.forms import User
 from django.utils.translation import ugettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.core.exceptions import ValidationError
-import re
 from django.core.validators import validate_email
+
+import re
+
+from .models import Trainee, Training, AssignedTraining, Assignment, Task
 
 
 class LoginForm(forms.Form):
@@ -28,6 +30,7 @@ class LoginForm(forms.Form):
         else:
             return password
 
+
 class ProfileForm(forms.ModelForm):
 
     class Meta:
@@ -41,9 +44,9 @@ class ProfileForm(forms.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.fields['designation'].required=False
 
-    def save(self, user):
+    def save(self, *args, **kwargs):
         profile = super(ProfileForm, self).save(commit=False)
-        profile.user = user
+        profile.user = kwargs['user']
         profile.save()
         return profile
 
@@ -53,6 +56,7 @@ class ProfileForm(forms.ModelForm):
             raise forms.ValidationError("Designation field is required.",                                      code='invalid')
         else:
             return designation
+
 
 class UserForm(forms.ModelForm):
 
@@ -70,8 +74,8 @@ class UserForm(forms.ModelForm):
             'password': forms.PasswordInput(),
         }
         # error_messages = {
-        #     'first_name': {
-        #        'required': _("This writer's name is too long.")}
+        #     'password': {
+        #        'required': _("This writer's password required.")}
         # }
 
     # def validate_even(self, value):
@@ -122,3 +126,131 @@ class UserForm(forms.ModelForm):
                                         code='invalid')
         else:
             return email
+
+
+class AddTrainingForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Training
+        fields = '__all__'
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control'}),
+            'due_date': forms.TextInput(attrs={'type':'date', 'class':'form-control'}),
+            'document': forms.FileInput(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AddTrainingForm, self).__init__(*args, **kwargs)
+        self.fields['document'].required=False
+
+    def clean_due_date(self):
+        due_date = self.cleaned_data.get("due_date")
+        if not due_date:
+            raise forms.ValidationError("Due date field is required.",
+                                        code='invalid')
+        else:
+            return due_date
+
+    def clean_title(self):
+        title = self.cleaned_data.get("title")
+        if not title:
+            raise forms.ValidationError("Title field is required.",
+                                        code='invalid')
+        else:
+            return title
+
+    def clean_description(self):
+        description = self.cleaned_data.get("description")
+        if not description:
+            raise forms.ValidationError("Description field is required.",
+                                        code='invalid')
+        else:
+            return description
+
+
+class TaskForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Task
+
+        fields = [
+            'title',
+            'description'
+        ]
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control'}),
+        }
+
+
+    def clean_title(self):
+        title = self.cleaned_data.get("title")
+        if not title:
+            raise forms.ValidationError("Title field is required.",
+                                        code='invalid')
+        else:
+            return title
+
+    def clean_description(self):
+        description = self.cleaned_data.get("description")
+        if not description:
+            raise forms.ValidationError("Description field is required.",
+                                        code='invalid')
+        else:
+            return description
+
+
+
+class AssignmentForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Assignment
+
+        fields = [
+            'title',
+            'description',
+            'assignment_file_path',
+            'due_date'
+        ]
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class':'form-control'}),
+            'description': forms.Textarea(attrs={'class':'form-control'}),
+            'due_date': forms.TextInput(attrs={'type':'date', 'class':'form-control'}),
+            'assignment_file_path': forms.FileInput(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(AssignmentForm, self).__init__(*args, **kwargs)
+        self.fields['assignment_file_path'].required=False
+
+
+    def clean_due_date(self):
+        due_date = self.cleaned_data.get("due_date")
+        if not due_date:
+            raise forms.ValidationError("Due date field is required.",
+                                        code='invalid')
+        else:
+            return due_date
+
+    def clean_title(self):
+        title = self.cleaned_data.get("title")
+        if not title:
+            raise forms.ValidationError("Title field is required.",
+                                        code='invalid')
+        else:
+            return title
+
+    def clean_description(self):
+        description = self.cleaned_data.get("description")
+        if not description:
+            raise forms.ValidationError("Description field is required.",
+                                        code='invalid')
+        else:
+            return description

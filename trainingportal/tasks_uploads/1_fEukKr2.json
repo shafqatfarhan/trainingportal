@@ -1,0 +1,22 @@
+"MODULESTORE": {
+        "default": {
+            "ENGINE": "xmodule.modulestore.mixed.MixedModuleStore", 
+            "OPTIONS": {
+                "mappings": {}, 
+                "stores": [
+                    {
+                        "DOC_STORE_CONFIG": {...settings...}, 
+                        "ENGINE": "xmodule.modulestore.split_mongo.split_draft.DraftVersioningModuleStore", 
+                        "NAME": "split", 
+                        "OPTIONS": {...settings...}
+                    },
+                    {
+                        "DOC_STORE_CONFIG": {...settings...}, 
+                        "ENGINE": "xmodule.modulestore.mongo.DraftMongoModuleStore", 
+                        "NAME": "draft", 
+                        "OPTIONS": {...settings...}
+                    }
+                ]
+            }
+        }
+    }, 
