@@ -11,7 +11,7 @@ $(document).ready(function () {
 
         if (title == null || title == '' ||
             description == null || description == '') {
-            $('#validate_text').html('Required fields are emptyyyy.<br/>');
+            $('#validate_text').html('Required fields are empty.<br/>');
             event.preventDefault();
         }
     });
@@ -46,7 +46,4 @@ $(document).ready(function () {
         });
         return false;
     });
-
-    //            data: data + "&task_id=" + '{{ task_id }}',
-
 });

@@ -1,0 +1,116 @@
+{% extends "trainingportal/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% bootstrap_css %}
+{% block content %}
+    <link rel="stylesheet" href="{% static 'css/add_trainer_modal_style.css' %}">
+
+    <div class="container" style="margin-top: 100px;">
+        {% if is_staff %}
+            <div class="text-right">
+                <button type="button" id="trainingBtn" class="btn btn-primary">
+                    Add Assignment
+                </button>
+            </div>
+        {% endif %}
+        <div class="col-md-12">
+            {% if no_assignments %}
+                <h2>{{ no_assignments }}</h2>
+            {% else %}
+                <h2>Assignments Assigned</h2>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Assignment Path</th>
+                            <th>Due Date</th>
+                            <th>
+                                {% if is_staff %}
+                                    Evaluate Assignment
+                                {% else %}
+                                    Submit Assignment
+                                {% endif %}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for assignment in assignments %}
+                            <tr>
+                                <td>{{ assignment.id }}</td>
+                                <td>{{ assignment.title }}</td>
+                                <td>{{ assignment.description }}</td>
+                                <td>{{ assignment.assignment_file_path }}</td>
+                                <td>{{ assignment.due_date }}</td>
+                                <td>
+                                    {% if is_staff %}
+                                        {% if assignment.status == True %}
+                                            {% if not assignment.score %}
+                                                <button onclick="location.href='{% url 'evaluate_assignment' assignment.id %}'"
+                                                        class="btn btn-primary">Evaluate
+                                                </button>
+                                            {% else %}
+                                                <button disabled class="btn btn-primary">Already Evaluated</button>
+                                            {% endif %}
+                                        {% else %}
+                                            <button disabled class="btn btn-primary">In Progress</button>
+                                        {% endif %}
+                                    {% else %}
+                                        {% if assignment.status == True %}
+                                            <button disabled class="btn btn-primary">Submitted</button>
+                                        {% else %}
+                                            <button onclick="location.href='{% url 'submit_assignment' assignment.id %}'"
+                                                    class="btn btn-primary">Submit</button>
+                                        {% endif %}
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h1 class="container text-center" style="width: 500px; margin-top: 10px;">Add Assignment</h1>
+            <div class="container" style="width: 500px; margin-top: 10px;">
+                <form action="/assignments/?task_id={{ task_id }}" class="form-horizontal" id="assignmentForm"
+                      style="padding: 15px 40px 15px 40px; background-color: #ebebeb"
+                      method="post" enctype="multipart/form-data">
+                    <p id="validate_text" style="color: red"></p>
+
+                    {% csrf_token %}
+                    {% for field in assignment_form %}
+                        <div class="form-group">
+                    <span style="color: red">
+                        {{ field.errors }}
+                    </span>
+                            <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.help_text %}
+                                <p class="help">{{ field.help_text|safe }}</p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <div class="text-center">
+                        <button type="submit" formNoValidate id="submitBtn" class="btn btn-primary">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script src={% static "js/trainingportal/assignment_form.js" %}></script>
+    <script src={% static "js/trainingportal/add_training_modal.js" %}></script>
+{% endblock %}

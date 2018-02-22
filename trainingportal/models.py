@@ -83,3 +83,4 @@ class Assignment(models.Model):
     score = models.FloatField(null=True)
     assignment_submission_path = models.FileField(upload_to='solution_uploads/', null=True)
     assignment_file_path = models.FileField(upload_to='tasks_uploads/', null=True)
+    status = models.BooleanField(null=False, blank=False, default=False)

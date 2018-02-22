@@ -6,11 +6,13 @@
     <link rel="stylesheet" href="{% static 'css/add_trainer_modal_style.css' %}">
 
     <div class="container" style="margin-top: 100px;">
-        <div class="text-right">
-            <button type="button" id="trainingBtn" class="btn btn-primary">
-                Add Task
-            </button>
-        </div>
+        {% if is_staff %}
+            <div class="text-right">
+                <button type="button" id="trainingBtn" class="btn btn-primary">
+                    Add Task
+                </button>
+            </div>
+        {% endif %}
         <div class="col-md-12">
             {% if no_tasks %}
                 <h2>{{ no_tasks }}</h2>
@@ -32,9 +34,9 @@
                             <td>{{ task.title }}</td>
                             <td>{{ task.description }}</td>
                             <td>
-                                <button class="btn btn-primary">View Assignments</button>
+                                <button onclick="location.href='{% url 'assignments' %}?task_id={{ task.id }}'"
+                                        class="btn btn-primary">Assignments</button>
                             </td>
-                            <td><button class="btn btn-primary">Add Assignments</button></td>
                         </tr>
                     {% endfor %}
                     </tbody>

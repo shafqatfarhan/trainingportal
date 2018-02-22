@@ -11,8 +11,8 @@ from .models import Trainee, Training, AssignedTraining, Assignment, Task
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class':'form-control'}))
-    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class':'form-control'}))
+    username = forms.CharField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 
     def clean_username(self):
         username = self.cleaned_data.get("username")
@@ -32,7 +32,6 @@ class LoginForm(forms.Form):
 
 
 class ProfileForm(forms.ModelForm):
-
     class Meta:
 
         model = Trainee
@@ -42,7 +41,7 @@ class ProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
-        self.fields['designation'].required=False
+        self.fields['designation'].required = False
 
     def save(self, *args, **kwargs):
         profile = super(ProfileForm, self).save(commit=False)
@@ -53,13 +52,12 @@ class ProfileForm(forms.ModelForm):
     def clean_designation(self):
         designation = self.cleaned_data.get("designation")
         if not designation:
-            raise forms.ValidationError("Designation field is required.",                                      code='invalid')
+            raise forms.ValidationError("Designation field is required.", code='invalid')
         else:
             return designation
 
 
 class UserForm(forms.ModelForm):
-
     class Meta:
 
         model = User
@@ -87,19 +85,19 @@ class UserForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(UserForm, self).__init__(*args, **kwargs)
-        self.fields['first_name'].required=True
-        self.fields['last_name'].required=True
-        self.fields['email'].required=True
-        #self.fields['username'].validators=[self.validate_even]
+        self.fields['first_name'].required = True
+        self.fields['last_name'].required = True
+        self.fields['email'].required = True
+        # self.fields['username'].validators=[self.validate_even]
         self.fields['username'].help_text = ""
-        #self.fields['username'].error_messages = {'required': 'Username field is required.'}
-        self.fields['password'].required=True
+        # self.fields['username'].error_messages = {'required': 'Username field is required.'}
+        self.fields['password'].required = True
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get("first_name")
         if not re.match(r'^[A-Za-z ]+$', first_name):
             raise forms.ValidationError("Special characters or numbers are not valid.",
-                                        code = 'invalid')
+                                        code='invalid')
         else:
             return first_name
 
@@ -107,7 +105,7 @@ class UserForm(forms.ModelForm):
         last_name = self.cleaned_data.get("last_name")
         if not re.match(r'^[A-Za-z ]+$', last_name):
             raise forms.ValidationError("Special characters or numbers are not valid.",
-                                        code = 'invalid')
+                                        code='invalid')
         else:
             return last_name
 
@@ -129,22 +127,21 @@ class UserForm(forms.ModelForm):
 
 
 class AddTrainingForm(forms.ModelForm):
-
     class Meta:
 
         model = Training
         fields = '__all__'
 
         widgets = {
-            'title': forms.TextInput(attrs={'class':'form-control'}),
-            'description': forms.Textarea(attrs={'class':'form-control'}),
-            'due_date': forms.TextInput(attrs={'type':'date', 'class':'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'due_date': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
             'document': forms.FileInput(attrs={'class': 'form-control'})
         }
 
     def __init__(self, *args, **kwargs):
         super(AddTrainingForm, self).__init__(*args, **kwargs)
-        self.fields['document'].required=False
+        self.fields['document'].required = False
 
     def clean_due_date(self):
         due_date = self.cleaned_data.get("due_date")
@@ -172,7 +169,6 @@ class AddTrainingForm(forms.ModelForm):
 
 
 class TaskForm(forms.ModelForm):
-
     class Meta:
 
         model = Task
@@ -183,10 +179,9 @@ class TaskForm(forms.ModelForm):
         ]
 
         widgets = {
-            'title': forms.TextInput(attrs={'class':'form-control'}),
-            'description': forms.Textarea(attrs={'class':'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
         }
-
 
     def clean_title(self):
         title = self.cleaned_data.get("title")
@@ -205,9 +200,7 @@ class TaskForm(forms.ModelForm):
             return description
 
 
-
 class AssignmentForm(forms.ModelForm):
-
     class Meta:
 
         model = Assignment
@@ -220,16 +213,15 @@ class AssignmentForm(forms.ModelForm):
         ]
 
         widgets = {
-            'title': forms.TextInput(attrs={'class':'form-control'}),
-            'description': forms.Textarea(attrs={'class':'form-control'}),
-            'due_date': forms.TextInput(attrs={'type':'date', 'class':'form-control'}),
+            'title': forms.TextInput(attrs={'class': 'form-control'}),
+            'description': forms.Textarea(attrs={'class': 'form-control'}),
+            'due_date': forms.TextInput(attrs={'type': 'date', 'class': 'form-control'}),
             'assignment_file_path': forms.FileInput(attrs={'class': 'form-control'})
         }
 
     def __init__(self, *args, **kwargs):
         super(AssignmentForm, self).__init__(*args, **kwargs)
-        self.fields['assignment_file_path'].required=False
-
+        self.fields['assignment_file_path'].required = False
 
     def clean_due_date(self):
         due_date = self.cleaned_data.get("due_date")
@@ -254,3 +246,85 @@ class AssignmentForm(forms.ModelForm):
                                         code='invalid')
         else:
             return description
+
+class SubmitAssignmentForm(forms.ModelForm):
+
+    class Meta:
+
+        model = Assignment
+
+        fields = [
+            'title',
+            'description',
+            'assignment_submission_path',
+            'due_date'
+        ]
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control',
+                                            'disabled': 'disabled'}),
+            'description': forms.Textarea(attrs={'class': 'form-control',
+                                                 'disabled': 'disabled'}),
+            'due_date': forms.TextInput(attrs={'type': 'date', 'class': 'form-control',
+                                               'disabled': 'disabled'}),
+            'assignment_submission_path': forms.FileInput(attrs={'class': 'form-control'})
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(SubmitAssignmentForm, self).__init__(*args, **kwargs)
+        self.fields['assignment_submission_path'].required = True
+        self.fields['due_date'].required = False
+        self.fields['description'].required = False
+        self.fields['title'].required = False
+
+
+class EvaluateAssignmentForm(forms.ModelForm):
+    class Meta:
+
+        model = Assignment
+
+        fields = [
+            'title',
+            'description',
+            'due_date',
+            'assignment_submission_path',
+            'score',
+            'remarks'
+        ]
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control',
+                                            'disabled': 'disabled'}),
+            'description': forms.Textarea(attrs={'class': 'form-control',
+                                                 'disabled': 'disabled'}),
+            'due_date': forms.TextInput(attrs={'type': 'date', 'class': 'form-control',
+                                               'disabled': 'disabled'}),
+            'score': forms.NumberInput(attrs={'step': "0.5",
+                                              'class': 'form-control'}),
+            'assignment_submission_path': forms.TextInput(attrs={'class': 'form-control',
+                                                                 'disabled': 'disabled'}),
+            'remarks': forms.Textarea(attrs={'class': 'form-control'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(EvaluateAssignmentForm, self).__init__(*args, **kwargs)
+        self.fields['assignment_submission_path'].required = False
+        self.fields['due_date'].required = False
+        self.fields['description'].required = False
+        self.fields['title'].required = False
+
+    def clean_score(self):
+        score = self.cleaned_data.get("score")
+        if not score:
+            raise forms.ValidationError("Score field is required.",
+                                        code='invalid')
+        else:
+            return score
+
+    def clean_remarks(self):
+        remarks = self.cleaned_data.get("remarks")
+        if not remarks:
+            raise forms.ValidationError("Remarks field is required.",
+                                        code='invalid')
+        else:
+            return remarks
