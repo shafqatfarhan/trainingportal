@@ -39,7 +39,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'bootstrap3',
     'trainingportal',
+    'rest_framework',
 ]
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly',
+        'rest_framework.permissions.DjangoModelPermissions',
+
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,9 +64,9 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'trainingportal.urls'
 
-MEDIA_ROOT = '/home/shafaqat/PycharmProjects/training/venv2/trainingportal/trainingportal/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'trainingportal')
 
-MEDIA_URL = 'http://media.trainingportal.com/'
+MEDIA_URL = '/tasks_uploads/'#'http://media.trainingportal.com/'
 
 TEMPLATES = [
     {

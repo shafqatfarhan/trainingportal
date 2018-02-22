@@ -1,0 +1,45 @@
+{% extends "trainingportal/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% bootstrap_css %}
+{% block content %}
+    <h1 class="container text-center" style="width: 500px; margin-top: 70px;">Evaluate Assignment</h1>
+    <div class="container" style="width: 500px; margin-top: 30px;">
+        <form action="/enroll_training/" class="form-horizontal" id="evaluateAssignmentForm"
+              style="padding: 15px 40px 15px 40px; background-color: #ebebeb" method="post">
+            {% if already_enrolled %}
+                <p id="validate_text" style="color: red">{{ already_enrolled }}</p>
+            {% endif %}
+            {% csrf_token %}
+{#            {% for field in assignment_form %}#}
+{#                <div class="form-group">#}
+{#                    <span style="color: red">#}
+{#                        {{ field.errors }}#}
+{#                    </span>#}
+{#                    <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>#}
+{#                    {{ field }}#}
+{#                    {% if field.help_text %}#}
+{#                        <p class="help">{{ field.help_text|safe }}</p>#}
+{#                    {% endif %}#}
+{#                </div>#}
+{#            {% endfor %}#}
+
+            <select name="training" class="form-control">
+                {% for training in trainings %}
+                    <option value="{{training.id}}">Training: {{training.title}}</option>
+                {% endfor %}
+            </select>
+
+            <select name="trainer" class="form-control" style="margin-top: 20px;">
+                {% for trainer in trainers %}
+                    <option value="{{trainer.id}}">Trainer: {{trainer.first_name}} {{trainer.last_name}}</option>
+                {% endfor %}
+            </select>
+            <div class="text-center" style="margin-top: 20px;">
+                <button type="submit" formNoValidate id="enrollBtn" class="btn btn-primary">
+                    Enroll
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

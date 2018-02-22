@@ -1,0 +1,33 @@
+{% extends "trainingportal/base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+{% bootstrap_css %}
+{% block content %}
+    <h1 class="container text-center" style="width: 500px; margin-top: 10px;">Submit Assignment</h1>
+    <div class="container" style="width: 500px; margin-top: 10px;">
+        <form action="/submit_assignment/{{ assignment_id }}/" class="form-horizontal" id="submitAssignmentForm"
+              style="padding: 15px 40px 15px 40px; background-color: #ebebeb" method="post" enctype="multipart/form-data">
+
+            {% csrf_token %}
+            {% for field in assignment_form %}
+                <div class="form-group">
+                    <span style="color: red">
+                        {{ field.errors }}
+                    </span>
+                    <label class="control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help">{{ field.help_text|safe }}</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            <div class="text-center">
+                <button type="submit" formNoValidate class="btn btn-primary">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <script src={% static "js/trainingportal/submit_assignment.js" %}></script>
+{% endblock %}

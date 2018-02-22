@@ -1,0 +1,144 @@
+{
+  'spider_name': 'orsay-de-crawl',
+  'retailer': 'orsay-de',
+  'currency': 'EUR',
+  'market': 'DE',
+  'category': [
+    
+  ],
+  'uuid': None,
+  'retailer_sk': '102026',
+  'product_hash': 'ac6d5dc9cc5774109e2f2181',
+  'price': 2599,
+  'description': [
+    'Unser Tipp: Als Basic zum Lederrock und abgestimmter ORSAY-Clutch tragen!'
+  ],
+  'url_original': 'http://www.orsay.com/de-de/top-aus-spitze-10202642.html',
+  'brand': 'Orsay',
+  'image_urls': [
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_42f_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_42b_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_42p.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_42s_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_42d_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_60f_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_60b_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_60p_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_60s_1.jpg',
+    'http://images.orsay.com/media/catalog/product/cache/allstores/image/9df78eab33525d08d6e5fb8d27136e95/1/0/102026_60d_1.jpg'
+  ],
+  'trail': [
+    ('',
+    'http://www.orsay.com/'),
+    ('UNI',
+    'http://www.orsay.com/de-de/neuheiten/t-shirts/uni.html')
+  ],
+  'crawl_id': 'orsay-de-20161107-1478509215-okfa',
+  'date': 1478512866,
+  'skus': {
+    '10202642_XXL': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Rot',
+      'size': 'XXL'
+    },
+    '10202642_L': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Rot',
+      'size': 'L'
+    },
+    '10202642_M': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Rot',
+      'size': 'M'
+    },
+    '10202642_XL': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Rot',
+      'size': 'XL'
+    },
+    '10202660_XXL': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Schwarz',
+      'size': 'XXL'
+    },
+    '10202660_L': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Schwarz',
+      'size': 'L'
+    },
+    '10202660_M': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Schwarz',
+      'size': 'M'
+    },
+    '10202660_XS': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Schwarz',
+      'size': 'XS'
+    },
+    '10202660_XL': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Schwarz',
+      'size': 'XL'
+    },
+    '10202660_S': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Schwarz',
+      'size': 'S'
+    },
+    '10202660_XXS': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Schwarz',
+      'size': 'XXS'
+    },
+    '10202642_XS': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Rot',
+      'size': 'XS'
+    },
+    '10202642_S': {
+      'currency': 'EUR',
+      'price': 2599,
+      'colour': 'Rot',
+      'size': 'S'
+    },
+    '10202642_XXS': {
+      'currency': 'EUR',
+      'price': 2599,
+      'out_of_stock': True,
+      'colour': 'Rot',
+      'size': 'XXS'
+    }
+  },
+  'care': [
+    '99% POLYAMID, 1% ELASTHAN',
+    'http://www.orsay.com/skin/frontend/enterprise/orsay/images/caresymbols/wash-30.png',
+    'http://www.orsay.com/skin/frontend/enterprise/orsay/images/caresymbols/chlore-0.png',
+    'http://www.orsay.com/skin/frontend/enterprise/orsay/images/caresymbols/sharp-L.png',
+    'http://www.orsay.com/skin/frontend/enterprise/orsay/images/caresymbols/clean-0.png',
+    'http://www.orsay.com/skin/frontend/enterprise/orsay/images/caresymbols/linge-0.png'
+  ],
+  'lang': 'de',
+  'name': 'Top aus Spitze',
+  'url': 'http://www.orsay.com/de-de/top-aus-spitze-10202642.html',
+  'gender': 'women',
+  'industry': None,
+  'crawl_start_time': '2016-11-07T10:00:16.985826'
+}

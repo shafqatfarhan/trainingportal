@@ -3,6 +3,7 @@
  */
 $(document).ready(function () {
 
+    $('#error_msg').hide();
     $("#submitBtn").click(function(event) {
         var username = $("#id_username").val();
         var password = $("#id_password").val();
@@ -11,10 +12,6 @@ $(document).ready(function () {
         {
             $('#validate_text').html('Username or password is empty<br/>');
             event.preventDefault();
-        }
-        else
-        {
-
         }
     });
 
@@ -25,11 +22,16 @@ $(document).ready(function () {
                 url: frm.attr('action'),
                 data: frm.serialize(),
                 success: function (data) {
-                    alert(data);
-                    $('html').html(data);
+                    data = JSON.parse(data);
+                    if (data['failure_message'])
+                    {$('#error_msg').show(1000);}
+                    else
+                    {
+                        window.location.href = data['redirect_path'];
+                    }
                 },
                 error: function(data) {
-                    alert('Request failed.');
+                    $('#error_msg').show(1000);
                 }
             });
             return false;
